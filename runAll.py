@@ -22,7 +22,7 @@ parser.add_argument('--makeresponse', help = 'Remake Response Matrix', action = 
 parser.add_argument('--plotstest',help='Produce plots in test mode; useful for debugging',action='store_true')
 p = parser.parse_args()
 
-if p.out_dir < 0:
+if not p.out_dir:
   print("ERROR: Output directory argument not provided")
   parser.print_help()
   exit(1)
@@ -38,21 +38,21 @@ fakedata = ""
 reco_var_2g1p_input = ""
 reco_var_2g0p_input = ""
 true_var_input = ""
-if p.reco_var_2g1p_input > 0:
+if p.reco_var_2g1p_input:
   reco_var_2g1p_input = p.reco_var_2g1p_input
-if p.reco_var_2g0p_input > 0:
+if p.reco_var_2g0p_input:
   reco_var_2g0p_input = p.reco_var_2g0p_input
-if p.true_var_input > 0:
+if p.true_var_input:
   true_var_input = p.true_var_input
 closureTest = ""
 plotstest = ""
-if p.translateHiststest > 0:
+if p.translateHiststest:
   translateHiststest = " --test"
-if p.fakedata > 0:
+if p.fakedata:
   fakedata = " --fakedata"
-if p.closureTest > 0:
+if p.closureTest:
   closureTest = " --closureTest"
-if p.plotstest > 0:
+if p.plotstest:
   plotstest = " --test"
 
 #############################################################################################################
@@ -60,14 +60,14 @@ if p.plotstest > 0:
 #############################################################################################################
 
 responseFileDir = outFileDir[:outFileDir.rfind("/") + 1] + "response_matrices"
-if p.makeresponse > 0:
+if p.makeresponse:
   command_string  = "root -l -q \"ResponseMaker.c(\\\"{0}\\\", \\\"{1}\\\", \\\"{2}\\\", \\\"{3}\\\", \\\"{4}\\\", \\\"{5}\\\")\"".format(responseFileDir, server, user, reco_var_2g1p_input, reco_var_2g0p_input, true_var_input)
   print("Running the following command: \"{0}\"".format(command_string))
   output = subprocess.check_output(command_string, shell = True, bufsize = 0)
   print(output)
 
 if not os.path.isfile(responseFileDir + "/response_matrices_exclusive.root"):
-  print "ERROR: Response file does not exist! Please rerun with option --makeresponse"
+  print("ERROR: Response file does not exist! Please rerun with option --makeresponse")
   print("responseFileDir is " + responseFileDir)
   parser.print_help()
   exit(1)
