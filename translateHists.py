@@ -455,7 +455,8 @@ for sigDef in ["2g0p","2g1p","2gXp"]:
     exec("mHist_data_selected_{0}.AddVertErrorBandAndFillWithCV(systName,nUniverses)".format(sigDef))
     if universePrefix == "minmax":
       exec("mHist_data_selected_{0}.GetVertErrorBand(systName).SetUseSpreadError(True)".format(sigDef))
-  
+
+  exec("mHist_data_selected_{0}.GetXaxis().SetTitle(\"Reco #pi^{{0}} Momentum\")".format(sigDef))
   exec("writeHist(mHist_data_selected_{0},outFile)".format(sigDef))
   
 #############################################################################################################
@@ -671,6 +672,7 @@ for sigDef in ["2g1p","2g0p","2gXp"]:
       for systName,universePrefix,nUniverses in FLUX_SYSTS + DETECTOR_SYSTS + G4_SYSTS + OTHER_SYSTS:
         exec("mHist_xSection_mc_{0}_{1}.PopVertErrorBand(\"{2}\")".format(sigDef,sigDefexcl,systName))
 
+      exec("mHist_xSection_mc_{0}_{1}.GetXaxis().SetTitle(\"True #pi^{{0}} Momentum\")".format(sigDef,sigDefexcl))
       exec("writeHist(mHist_xSection_mc_{0}_{1},outFile)".format(sigDef,sigDefexcl))
       
 #############################################################################################################
