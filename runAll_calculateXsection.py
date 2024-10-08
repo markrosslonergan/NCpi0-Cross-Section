@@ -12,8 +12,8 @@ parser.add_argument('--closureTest',help='Input file corresponds to closure test
 p = parser.parse_args()
 
 ## If in_dir is not provided, exit
-if p.in_dir < 0:
-  print "ERROR: Input directory argument not provided"
+if not p.in_dir:
+  print ("ERROR: Input directory argument not provided")
   parser.print_help()
   exit(1)
 
@@ -45,7 +45,7 @@ for config in configs_to_run:
 
   file_to_process = "{0}/{1}_out_unfolded_{2}{3}.root".format(inFileDir,date_string,config, closureTest)
   command_string = "python calculateXsection.py {0}".format(file_to_process)
-  print "Running the following command: \"{0}\"".format(command_string)
+  print ("Running the following command: \"{0}\"".format(command_string))
 
   ## Run the command and capture the output
   output = subprocess.check_output(command_string, shell=True, bufsize=0)

@@ -13,8 +13,8 @@ parser.add_argument('--test', help = 'Produce plots in test mode; useful for deb
 p = parser.parse_args()
 
 ## If in_dir is not provided, exit
-if p.in_dir < 0:
-  print "ERROR: Input directory argument not provided"
+if not p.in_dir:
+  print ("ERROR: Input directory argument not provided")
   parser.print_help()
   exit(1)
 
@@ -49,7 +49,7 @@ for config in configs_to_run:
   file_to_process = "{0}/{1}_out_unfolded_{2}_{3}xsec-extracted.root".format(inFileDir,date_string,config, closureTest_)
   plotDir = "{0}/{1}_xsec-plots_{2}/".format(inFileDir,date_string,config)
   command_string = "python makeFakeDataStudyPlots.py {0} {1} {2} {3}".format(file_to_process,plotDir, closureTest, test)
-  print "Running the following command: \"{0}\"".format(command_string)
+  print ("Running the following command: \"{0}\"".format(command_string))
 
   ## Run the command and capture the output
   output = subprocess.check_output(command_string, shell=True, bufsize=0)

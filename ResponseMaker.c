@@ -1,5 +1,11 @@
 // Method to get gLEE tree loaded for proper looping-over
 // Originally from /exp/uboone/app/users/markrl/useful_scripts/plothelper.h
+//#include "TLine.h"
+#include "MnvH1D.h"
+//#include "MnvVertErrorBand.h"
+#include "MnvH2D.h"
+//#include "MnvPlotter.h"
+
 TTree* loadgLEE(std::string filename, std::string int_dir){
 
     TFile*f = new TFile((filename).c_str(),"read");
@@ -39,7 +45,7 @@ void ResponseMaker(std::string outDir, std::string server, std::string username,
     else{
         std::cout << "\n\nError! Your server name did not match the ones in the code. You need to ";
         std::cout << "type either 'manannan' or 'gpvm'. Aborting code; please rerun.\n\n";
-        return 0;
+        return;
     }
 
     //////////////////////////////////////////////////////////////////////////////
@@ -569,6 +575,6 @@ void ResponseMaker(std::string outDir, std::string server, std::string username,
     spectraout_2g0p -> Close();
     spectraout_2gXp -> Close();
 
-    return ;
+    //return ;
 
 }
